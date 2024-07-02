@@ -1,0 +1,22 @@
+// models/post.js
+const { DataTypes } = require("sequelize");
+
+module.exports = (sequelize) => {
+  const Post = sequelize.define("Post", {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+  });
+
+  // Associations
+  Post.associate = (models) => {
+    Post.belongsTo(models.User, { foreignKey: "userId" });
+  };
+
+  return Post;
+};
